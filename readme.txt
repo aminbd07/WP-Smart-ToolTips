@@ -22,8 +22,8 @@ Post title will show as tooltip text and post content will show as tooltip.
 
 
 = Features =
-  
-    
+  * Use Custom post as tooltip.
+  * Support any HTML in tooltips content. 
    
  
 == Installation ==
