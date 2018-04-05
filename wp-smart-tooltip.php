@@ -46,6 +46,8 @@ class WpSmartToolTips {
 
         add_action('init', array($this, 'wpstt_register_post_type'));
         add_shortcode('wp-smart-tooltip', array($this, 'render_wpstt_short_code'));
+        add_filter("manage_{$this->custom_post_name}_posts_columns", array($this, 'manage_custom_columns'));
+        add_action("manage_{$this->custom_post_name}_posts_custom_column", array($this, 'manage_custom_columns_value'));
     }
 
     public function define_constants() {
@@ -55,12 +57,12 @@ class WpSmartToolTips {
         $this->define('WPSTT_URL', plugins_url('', __FILE__)); // Chnage text 'YOUR_PLUGIN' 
     }
 
-    public function define( $name, $value ) {
-        if ( ! defined( $name ) ) {
-            define( $name, $value );
+    public function define($name, $value) {
+        if (!defined($name)) {
+            define($name, $value);
         }
     }
-    
+
     function load_textdomain() {
         load_plugin_textdomain($this->text_domain, false, dirname(plugin_basename(__FILE__)) . '/lang/');
     }
@@ -125,6 +127,28 @@ class WpSmartToolTips {
 
     function wpstt_global_settings() {
         require ( WPSTT_PATH . '/view/settings.php' );
+    }
+
+    function manage_custom_columns($columns) {
+
+
+        $new_columns['wpstt_sc'] = "Short Code";
+        $filtered_columns = array_merge($columns, $new_columns);
+
+
+        return $filtered_columns;
+    }
+
+    function manage_custom_columns_value($column) {
+        global $post;
+        switch ($column) {
+            case 'wpstt_sc' :
+                echo "[wp-smart-tooltip id='{$post->ID}']";
+                break;
+            
+            default :
+                break;
+        }
     }
 
     function render_wpstt_short_code($atts) {
