@@ -1,7 +1,8 @@
-=== WP Smart Tooltip ===
+=== WP Smart Tooltip Latest ===
 Contributors: naminbd, msisaifulsaif 
-Tags: tooltip, bootstrap tooltip
+Tags: tips, tooltip, bootstrap tooltip, dictionary, directory, glossary, responsive
 Donate link: http://nurulamin.me/supportme/
+Requires PHP: 5.2.4
 Requires at least: 3.0
 Tested up to: 4.7.1
 Stable tag: trunk
@@ -26,7 +27,22 @@ Post title will show as tooltip text and post content will show as tooltip.
    
  
 == Installation ==
-1. Unzip the package zip file. 
-Upload the folder  to the /wp-content/plugins/ directory
-Activate the plugin through the ‘Plugins’ menu in WordPress
+1. Download and install the plugin from WordPress dashboard. You can also upload the entire “wp smart tooltips” folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the ‘Plugins’ menu in WordPress
+
+== Changelog ==
+= 1.0.0 =
+* Initial release. 
+ 
+
+== Screenshots ==
+1. 
+2. 
+3. 
+
+
+== Frequently Asked Questions ==
+= What about support? =
+Create a support ticket at WordPress forum and I will take care of any issue.
+
 
