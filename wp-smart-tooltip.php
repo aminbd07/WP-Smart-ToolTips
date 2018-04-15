@@ -69,7 +69,8 @@ class WpSmartToolTips {
 
     function wpstt_admin_menu() {
         $capability = 'read'; //minimum level: subscriber 
-        add_submenu_page('edit.php?post_type=' . $this->custom_post_name, __('WPSTT Settings', $this->text_domain), __('Setting', $this->text_domain), $capability, $this->custom_post_name, array($this, 'wpstt_global_settings'));
+        add_submenu_page('edit.php?post_type=' . $this->custom_post_name, __('How To USE', $this->text_domain), __('How to Use', $this->text_domain), $capability, __('how_to_use', $this->text_domain), array($this, 'manage_submenu_pages'));
+        add_submenu_page('edit.php?post_type=' . $this->custom_post_name, __('WPSTT Settings', $this->text_domain), __('Setting', $this->text_domain), $capability, __('global_settings', $this->text_domain), array($this, 'manage_submenu_pages'));
     }
 
     public function activate() {
@@ -125,8 +126,22 @@ class WpSmartToolTips {
         wp_enqueue_style('wpsmarttooltip_front', plugins_url('/assets/css/style.css', __FILE__));
     }
 
-    function wpstt_global_settings() {
-        require ( WPSTT_PATH . '/view/settings.php' );
+    function manage_submenu_pages() {
+        $page = $_GET['page'];
+        $view_page = 'dehult.php';
+        switch ($page) {
+            
+            case "how_to_use" :
+                $view_page = "how_to_use.php" ; 
+                break;
+            
+            case "global_settings" :
+                $view_page = "settings.php" ; 
+                break;
+
+            default:
+        }
+        require ( WPSTT_PATH . '/view/'. $view_page );
     }
 
     function manage_custom_columns($columns) {
