@@ -3,6 +3,12 @@
     font-weight: bold;
 }
 
+.wpstt .how-to-group{
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
 .wpstt .title{
     font-weight: bold; 
     font-size: 110%;

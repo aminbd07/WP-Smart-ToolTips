@@ -34,6 +34,7 @@ class WpSmartToolTips {
         $this->init_actions();
         $this->define_constants();
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
+        add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue' ) );
 
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
@@ -124,6 +125,11 @@ class WpSmartToolTips {
         wp_enqueue_script('jquery_ui', "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js");
         wp_enqueue_script('wpsmarttooltip_front', plugins_url('assets/js/script.js', __FILE__), '', false, true);
         wp_enqueue_style('wpsmarttooltip_front', plugins_url('/assets/css/style.css', __FILE__));
+    }
+
+    function admin_enqueue() {
+            
+        wp_enqueue_style('wpsmarttooltip_backend', plugins_url('/assets/css/admin_style.css', __FILE__));
     }
 
     function manage_submenu_pages() {
