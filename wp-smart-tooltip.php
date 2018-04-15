@@ -161,6 +161,9 @@ class WpSmartToolTips {
         if (!$post) {
             return;
         }
+        if( $this->custom_post_name !== $post->post_type){
+            return;
+        }
         $title = $post->post_title;
         $content = $post->post_content;
 
