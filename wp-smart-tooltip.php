@@ -145,27 +145,36 @@ class WpSmartToolTips {
             case 'wpstt_sc' :
                 echo "[wp-smart-tooltip id='{$post->ID}']";
                 break;
-            
+
             default :
                 break;
         }
     }
 
     function render_wpstt_short_code($atts) {
+
+        $title = "";
+        $content = "";
         $a = shortcode_atts(array(
             'id' => '',
+            'title' => '',
+            'content' => '',
                 ), $atts);
         extract($a);
-
-        $post = get_post((int) $id);
-        if (!$post) {
-            return;
+        if ($id) {
+            $post = get_post((int) $id);
+            if (!$post) {
+                return;
+            }
+            if ($this->custom_post_name !== $post->post_type) {
+                return;
+            }
+            $title = $post->post_title;
+            $content = $post->post_content;
+        } else if ($title != '') {
+            $title = $title;
+            $content = $content;
         }
-        if( $this->custom_post_name !== $post->post_type){
-            return;
-        }
-        $title = $post->post_title;
-        $content = $post->post_content;
 
         $data = "<span class='wp-tooltip' data-toggle='tooltip' title='{$content}'> {$title} </span>";
         return $data;
