@@ -34,7 +34,7 @@ class WpSmartToolTips {
         $this->init_actions();
         $this->define_constants();
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
-        add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue' ) );
+        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue'));
 
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
@@ -128,26 +128,29 @@ class WpSmartToolTips {
     }
 
     function admin_enqueue() {
-            
+        wp_enqueue_style( 'wp-color-picker' ); 
+        //wp_enqueue_style('bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
         wp_enqueue_style('wpsmarttooltip_backend', plugins_url('/assets/css/admin_style.css', __FILE__));
+        wp_enqueue_script( 'wpsmarttooltip_backend', plugins_url( '/assets/js/admin-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true ); 
+    
     }
 
     function manage_submenu_pages() {
         $page = $_GET['page'];
         $view_page = 'dehult.php';
         switch ($page) {
-            
+
             case "how_to_use" :
-                $view_page = "how_to_use.php" ; 
+                $view_page = "how_to_use.php";
                 break;
-            
+
             case "global_settings" :
-                $view_page = "settings.php" ; 
+                $view_page = "settings.php";
                 break;
 
             default:
         }
-        require ( WPSTT_PATH . '/view/'. $view_page );
+        require ( WPSTT_PATH . '/view/' . $view_page );
     }
 
     function manage_custom_columns($columns) {
