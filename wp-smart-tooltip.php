@@ -21,6 +21,8 @@ class WpSmartToolTips {
     public $text_domain = 'wpstt';
     public $db_version = '1.0.0';
     public $custom_post_name = 'wpsmart-tooltip';
+    public $setting_options_name = 'wpstt_global_settings';
+    public $global_setting = null;
     protected static $_instance = null;
 
     public static function instance() {
@@ -34,10 +36,14 @@ class WpSmartToolTips {
         $this->init_actions();
         $this->define_constants();
         add_action('wp_enqueue_scripts', array($this, 'enqueue'));
+        add_action('wp_head', array($this, 'render_global_style'));
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue'));
 
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
+
+        $settings = get_option($this->setting_options_name);
+        $this->global_setting = unserialize($settings);
     }
 
     function init_actions() {
@@ -49,6 +55,7 @@ class WpSmartToolTips {
         add_shortcode('wp-smart-tooltip', array($this, 'render_wpstt_short_code'));
         add_filter("manage_{$this->custom_post_name}_posts_columns", array($this, 'manage_custom_columns'));
         add_action("manage_{$this->custom_post_name}_posts_custom_column", array($this, 'manage_custom_columns_value'));
+        add_action('wp_ajax_wpstt_settings_save', array($this, 'wpstt_settings_save'));
     }
 
     public function define_constants() {
@@ -128,11 +135,13 @@ class WpSmartToolTips {
     }
 
     function admin_enqueue() {
-        wp_enqueue_style( 'wp-color-picker' ); 
-        //wp_enqueue_style('bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+        wp_enqueue_style('wp-color-picker');
         wp_enqueue_style('wpsmarttooltip_backend', plugins_url('/assets/css/admin_style.css', __FILE__));
-        wp_enqueue_script( 'wpsmarttooltip_backend', plugins_url( '/assets/js/admin-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true ); 
-    
+        wp_enqueue_script('wpsmarttooltip_backend', plugins_url('/assets/js/admin-script.js', __FILE__), array('wp-color-picker'), false, true);
+        wp_localize_script('wpsmarttooltip_backend', 'WPSTT_Vars', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('wpstt_nonce'),
+        ));
     }
 
     function manage_submenu_pages() {
@@ -175,6 +184,23 @@ class WpSmartToolTips {
         }
     }
 
+    /**
+     * Save settings
+     */
+    function wpstt_settings_save() {
+        $post = $_POST;
+        //check_ajax_referer('wpstt_nonce', $post['nonce']);
+        parse_str($post['form_data'], $form_data);
+
+        $form_data = serialize($form_data);
+
+        update_option($this->setting_options_name, $form_data);
+
+        echo "Save Success!!";
+
+        die();
+    }
+
     function render_wpstt_short_code($atts) {
 
         $title = "";
@@ -200,8 +226,29 @@ class WpSmartToolTips {
             $content = $content;
         }
 
-        $data = "<span class='wp-tooltip' data-toggle='tooltip' title='{$content}'> {$title} </span>";
+        $data = "<span class='wpstt_tooltips' data-placement='{$this->global_setting['popup_position']}' data-html='true' data-toggle='tooltip'  title='{$content}'> {$title} </span>";
         return $data;
+    }
+
+    function render_global_style() {
+        ?> 
+        <style>
+            .tooltip > .tooltip-inner {
+                background-color: <?php echo $this->global_setting['bg_color'] ?>; 
+                color: <?php echo $this->global_setting['text_color'] ?>;  
+            }
+            .tooltip.left > .tooltip-arrow{
+                
+            }
+            .tooltip-inner {
+                max-width: <?php echo $this->global_setting['popup_width'] ?>;
+                /* If max-width does not work, try using width instead */
+                width: <?php echo $this->global_setting['popup_width'] ?>; 
+            }
+
+        </style> 
+        <?php
+
     }
 
 }

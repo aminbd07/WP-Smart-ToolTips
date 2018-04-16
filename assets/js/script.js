@@ -1,7 +1,6 @@
 ;
 jQuery(document).ready(function() {
-    jQuery('[data-toggle=\"tooltip\"]').tooltip({
-        placement: 'top',
+    jQuery('[data-toggle=\"tooltip\"]').tooltip({ 
         track: true
     })
 });

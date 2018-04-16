@@ -46,3 +46,14 @@
 .wpstt   .text-center{
     text-align: center;
 }
+
+.wpstt .update-status{
+    padding: 10px;
+    color: green;
+    font-weight: bold; 
+    background: #e6f5e7;
+    border: #0b260d solid 1px;
+    width: 500px;
+    text-align: center;
+    
+}

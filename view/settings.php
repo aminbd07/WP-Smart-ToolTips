@@ -1,32 +1,33 @@
+
 <div class="<?php echo $this->text_domain ?> settings"> 
     <h1>Settings </h1>
-    <form>
+    <form method="post" id='wpstt-settings-form'>
         <div class=" form-area"> 
             <div class="form-group">
                 <label> Tooltip background color </label>
-                <input type="text" data-default-color="#444" class="color-field form-control " name="bg_color" value="" />
+                <input type="text" data-default-color="" class="color-field form-control " name="bg_color" value="<?php echo $this->global_setting['bg_color']?>" />
             </div>
 
 
             <div class="form-group">
                 <label> Tooltip text color  </label>
-                <input type="text" data-default-color="#444" class="color-field form-control " name="text_color" value="" />
-            </div>
-
-
+                <input type="text" data-default-color="" class="color-field form-control " name="text_color" value="<?php echo $this->global_setting['text_color']?>" />
+            </div> 
+            
             <div class="form-group">
                 <label> Tooltip popup position   </label>
                 <select name="popup_position" class="form-control ">
-                    <option value="top">Top</option>
-                    <option value="bottom">Bottom</option>
-                    <option value="left">Left</option>
-                    <option value="right">Right</option>
+                    <option value="top" <?php if($this->global_setting['popup_position'] == 'top' ) echo 'selected' ?> >Top</option>
+                    <option value="bottom" <?php if($this->global_setting['popup_position'] == 'bottom' ) echo 'selected' ?> >Bottom</option>
+                    <option value="left" <?php if($this->global_setting['popup_position'] == 'left' ) echo 'selected' ?> >Left</option>
+                    <option value="right"<?php if($this->global_setting['popup_position'] == 'right' ) echo 'selected' ?> >Right</option>
+                    <option value="auto"<?php if($this->global_setting['popup_position'] == 'auto' ) echo 'selected' ?> >Auto</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label> Tooltip popup width  </label>
-                <input type="text" name="popup_width" class="form-control " />
+                <input type="text" name="popup_width" class="form-control " value="<?php echo $this->global_setting['popup_width']?>" />
             </div>
             <br/>
 
@@ -42,5 +43,5 @@
 
 
     </form>
-
+    <div class="update-status" style="display: none"></div>
 </div>

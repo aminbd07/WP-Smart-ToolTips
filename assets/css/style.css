@@ -1,9 +1,4 @@
-.wp-tooltip {
-    text-decoration: underline #1f649f;
+.wpstt_tooltips {
+    text-decoration: underline;
     font-weight: bold;
-}
-
-.wpstt .title{
-    font-weight: bold; 
-    font-size: 110%;
 }
