@@ -29,6 +29,13 @@
                 <label> Tooltip popup width  </label>
                 <input type="text" name="popup_width" class="form-control " value="<?php echo $this->global_setting['popup_width']?>" />
             </div>
+            
+            <div class="form-group">
+                <label> Support HTML  </label>
+                <br/>
+                <label> <input type="radio" name="support_html" value="true" <?php if($this->global_setting['support_html'] == 'true' ) echo 'checked' ?> /> Yes </label>
+                <label> <input type="radio" name="support_html" value="false"  <?php if($this->global_setting['support_html'] == 'false' ) echo 'checked' ?>/> No </label>
+            </div>
             <br/>
 
             <div  class="form-group text-center" >

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Plugin Name: Wp Smart Tool Tip
  * Version: 1.0.0
@@ -201,16 +200,24 @@ class WpSmartToolTips {
         die();
     }
 
-    function render_wpstt_short_code($atts) {
+    function render_wpstt_short_code($atts, $content=null) {
 
-        $title = "";
-        $content = "";
+            
+            
+        
+            
+        $atts = array_change_key_case((array) $atts, CASE_LOWER);
+            
+
         $a = shortcode_atts(array(
             'id' => '',
             'title' => '',
-            'content' => '',
+            
                 ), $atts);
+
         extract($a);
+
+            
         if ($id) {
             $post = get_post((int) $id);
             if (!$post) {
@@ -225,8 +232,8 @@ class WpSmartToolTips {
             $title = $title;
             $content = $content;
         }
-
-        $data = "<span class='wpstt_tooltips' data-placement='{$this->global_setting['popup_position']}' data-html='true' data-toggle='tooltip'  title='{$content}'> {$title} </span>";
+            
+        $data = "<span class='wpstt_tooltips' data-placement='{$this->global_setting['popup_position']}' data-html='{$this->global_setting['support_html']}' data-toggle='tooltip'  title='{$content}'> {$title}</span>";
         return $data;
     }
 
@@ -238,17 +245,17 @@ class WpSmartToolTips {
                 color: <?php echo $this->global_setting['text_color'] ?>;  
             }
             .tooltip.left > .tooltip-arrow{
-                
+
             }
+            <?php if( $this->global_setting['popup_width'] !== '') { ?>
             .tooltip-inner {
                 max-width: <?php echo $this->global_setting['popup_width'] ?>;
                 /* If max-width does not work, try using width instead */
                 width: <?php echo $this->global_setting['popup_width'] ?>; 
             }
-
+            <?php } ?>
         </style> 
         <?php
-
     }
 
 }
