@@ -1,11 +1,11 @@
 <?php
 /*
- * Plugin Name: Wp Smart Tool Tip
+ * Plugin Name: Wp Smart Tooltip
  * Version: 1.0.0
  * Plugin URI:
  * Description: With this plugin, you can add tool tips any where in your site.
  * Author: Nurul Amin, Mohammad Saiful Islam
- * Author URI: http://nurulamin.me
+ * Author URI: http://nurul.ninja
  * Requires at least: 4.0
  * Tested up to:
  * License: GPL2

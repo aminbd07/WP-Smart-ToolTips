@@ -1,7 +1,7 @@
-=== WP Smart Tooltip Latest ===
+=== WP Smart Tooltip  ===
 Contributors: naminbd, msisaifulsaif 
 Tags: tips, tooltip, bootstrap tooltip, dictionary, directory, glossary, responsive
-Donate link: http://nurulamin.me/supportme/
+Donate link: http://nurul.ninja/supportme/
 Requires PHP: 5.2.4
 Requires at least: 3.0
 Tested up to: 4.9.1
@@ -50,7 +50,3 @@ Yes, you can change it from settings
 = How I use this plugin = 
 Please check 'how to use' sub menu form plugin. 
 
-
-== Upgrade Notice ==
-= 1.0.0 =
-Nothing to do. 
