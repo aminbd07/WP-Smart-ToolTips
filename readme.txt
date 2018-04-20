@@ -31,8 +31,12 @@ Post title will show as tooltip text and post content will show as tooltip.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress
 
 == Changelog ==
+= 1.0.1 =
+* Add Alap offset in settings. 
+
+
 = 1.0.0 =
-* Initial release. 
+* Initial release.  
  
 
 == Screenshots ==
